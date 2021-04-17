@@ -1,0 +1,23 @@
+{
+  "name": "login-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wisterleys/login-page.git"
+  },
+  "author": "Wisterleys Sousa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wisterleys/login-page/issues"
+  },
+  "homepage": "https://github.com/Wisterleys/login-page#readme",
+  "dependencies": {
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
+}
