@@ -1,11 +1,20 @@
 const { Sequelize } = require("sequelize");
+const table = require("../tables/tables")
 class DbR{
     constructor(){
-        this._db= new Sequelize('users', 'root', '123', {
-            host: 'localhost',
+        this._db= new Sequelize('users'/*DB*/, 'root'/*username*/, '123'/*password*/, {
+            host: 'localhost',/*servername*/
             dialect:'mysql'})
-        this.ok()
+            this.ok()//Confirmação da conexão bem sucedida ou não
     }
+    newTable(){//CRIA NOVA TABELA
+       let user = this.db.define("cadastros",table)
+       user.sync()
+    }
+   async inserinto(values){
+        //this.db
+    }
+    //Método para confirmação de conexão
     async ok(){
         try {
             await this.db.authenticate();
@@ -18,6 +27,7 @@ class DbR{
     get db(){
         return this._db;
     }
+    
 }
 
 module.exports=DbR;
