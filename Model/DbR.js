@@ -12,13 +12,18 @@ class DbR{
        user.sync()
     }
    async inserinto(values){
-        //this.db
+       let res = await table.create({
+            nome: values.nome,
+           senha:values.senha
+        })
+        console.log(res)
     }
     //Método para confirmação de conexão
     async ok(){
         try {
             await this.db.authenticate();
             console.log('Banco de dados conectado com sucesso!.');
+            this.inserinto({nome:"Wister",senha:123})
           } catch (error) {
             console.error('Erro na conexão ao DB:', error);
           }
