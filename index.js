@@ -1,17 +1,7 @@
-const { Sequelize } = require("sequelize");
+const DbR = require("./Model/DbR")
 
-const db = new Sequelize('users', 'root', '123', {
+const db = new DbR('users', 'root', '123', {
     host: 'localhost',
     dialect:'mysql'
   });
-
-
- async function test(){
-    try {
-        await db.authenticate();
-        console.log('Connection has been established successfully.');
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-      }
- }
- test()
+  db.ok();
