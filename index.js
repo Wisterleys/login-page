@@ -1,7 +1,4 @@
 const DbR = require("./Model/DbR")
 
-const db = new DbR('users', 'root', '123', {
-    host: 'localhost',
-    dialect:'mysql'
-  });
+const db = new DbR();
   db.ok();

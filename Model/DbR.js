@@ -1,16 +1,17 @@
 const { Sequelize } = require("sequelize");
 class DbR{
-    constructor(conf){
-        console.log(conf)
-        this._db= new Sequelize(conf)
-        //this.ok()
+    constructor(){
+        this._db= new Sequelize('users', 'root', '123', {
+            host: 'localhost',
+            dialect:'mysql'})
+        this.ok()
     }
     async ok(){
         try {
             await this.db.authenticate();
-            console.log('Connection has been established successfully.');
+            console.log('Banco de dados conectado com sucesso!.');
           } catch (error) {
-            console.error('Unable to connect to the database:', error);
+            console.error('Erro na conexão ao DB:', error);
           }
     }
     //SETs and GETs
