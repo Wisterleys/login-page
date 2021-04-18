@@ -5,17 +5,18 @@ class DbR{
             this._db=db;//Só para verficar se a conexão com o DB foi bem sucedida ou não
             this._table=table;
             this.ok()//Confirmação da conexão bem sucedida ou não
+            //this.newTable()
     }
     newTable(){//CRIA NOVA TABELA
-        this.table.sync()
+        this.table.sync({force:true})
     }
-    //Motando o CRUD
+    // CRUD
 
     //  C
    async insertinto(values){
        let res = await this.table.create({
-            nome: values.nome,
-           senha:values.senha
+            nome: values.login,
+           senha:values.password
         })
         console.log(res)
     }
@@ -25,6 +26,7 @@ class DbR{
         try {
             await this.db.authenticate();
             console.log('Banco de dados conectado com sucesso!.');
+            this.insertinto({login:"Magnuz",password:123})
           } catch (error) {
             console.error('Erro na conexão ao DB:', error);
           }
