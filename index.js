@@ -8,15 +8,14 @@ async function selectAll(res,req=false){
         let ress = await db.selectAll()
         res.json(ress)
     }else{
-        consol.log(req)
-        let ress = await db.selectAll()
+        let ress = await db.selectAll({where:{login:req}})
         res.json(ress)
     }
 }
-app.get("/dados",(req,res)=>{
+app.get("/search",(req,res)=>{
     selectAll(res)
 })
-app.get("/dados/:campos",(req,res)=>{
-    selectAll(res,req.params.campos)
+app.get("/search/:login",(req,res)=>{
+    selectAll(res,req.params.login)
 })
 app.listen(port,()=>console.log("Rodando na porta "+port))
