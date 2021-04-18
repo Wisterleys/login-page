@@ -5,7 +5,6 @@ class DbR{
             this._db=db;//Só para verficar se a conexão com o DB foi bem sucedida ou não
             this._table=table;
             this.ok()//Confirmação da conexão bem sucedida ou não
-            this.impTest();
             //this.newTable();
     }
     newTable(force=false){//CRIA NOVA TABELA
@@ -20,9 +19,9 @@ class DbR{
         })
     }
     // R
-    async selectAll(vetor=false){
+    async selectAll(obj=false){
         let users=[]
-        let res = vetor?await this.table.findAll({attributes:vetor,where: {login:"Wister"}}):await this.table.findAll()
+        let res = obj?await this.table.findAll(obj):await this.table.findAll()
         res.forEach(user=>{
             users.push(user.dataValues)
         })
@@ -42,11 +41,7 @@ class DbR{
           }
 
     }
-   async impTest(){
-    let res = await this.selectAll(["login","password"]);
-    console.log(res)
-        
-    }
+   
     //SETs and GETs
     get table(){
         return this._table;
