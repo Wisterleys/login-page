@@ -1,34 +1,38 @@
-const { Sequelize } = require("sequelize");
+const db = require("./conf/confDbR")
 const table = require("../tables/tables")
 class DbR{
     constructor(){
-        this._db= new Sequelize('users'/*DB*/, 'root'/*username*/, '123'/*password*/, {
-            host: 'localhost',/*servername*/
-            dialect:'mysql'})
-            this.table=this.db.define("cadastros",table)
+            this._db=db;//Só para verficar se a conexão com o DB foi bem sucedida ou não
+            this._table=table;
             this.ok()//Confirmação da conexão bem sucedida ou não
     }
     newTable(){//CRIA NOVA TABELA
         this.table.sync()
     }
-   async inserinto(values){
+    //Motando o CRUD
+
+    //  C
+   async insertinto(values){
        let res = await this.table.create({
             nome: values.nome,
            senha:values.senha
         })
         console.log(res)
     }
+    // R
     //Método para confirmação de conexão
     async ok(){
         try {
             await this.db.authenticate();
             console.log('Banco de dados conectado com sucesso!.');
-            this.inserinto({nome:"Wister",senha:123})
           } catch (error) {
             console.error('Erro na conexão ao DB:', error);
           }
     }
     //SETs and GETs
+    get table(){
+        return this._table;
+    }
     get db(){
         return this._db;
     }
