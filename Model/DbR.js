@@ -6,13 +6,12 @@ class DbR{
             this._table=table;
             this.ok()//Confirmação da conexão bem sucedida ou não
             this.impTest();
-            //this.newTable()
+            //this.newTable();
     }
-    newTable(){//CRIA NOVA TABELA
-        this.table.sync({force:true})
+    newTable(force=false){//CRIA NOVA TABELA
+        this.table.sync({force:force})
     }
     // CRUD
-
     //  C
    async insertinto(values){
        let res = await this.table.create({
@@ -23,7 +22,7 @@ class DbR{
     // R
     async selectAll(vetor=false){
         let users=[]
-        let res = vetor?await this.table.findAll({attributes: vetor}):await this.table.findAll()
+        let res = vetor?await this.table.findAll({attributes:vetor,where: {login:"Wister"}}):await this.table.findAll()
         res.forEach(user=>{
             users.push(user.dataValues)
         })
@@ -38,7 +37,6 @@ class DbR{
         try {
             await this.db.authenticate();
             console.log('Banco de dados conectado com sucesso!.');
-            
           } catch (error) {
             console.error('Erro na conexão ao DB:', error);
           }
@@ -60,3 +58,24 @@ class DbR{
 }
 
 module.exports=DbR;
+
+
+/*
+Modelo de buscas pelo findAll passando como parametro
+
+{
+    attributes:vetor,// aqui passa um vetor com os nomes dos campos que deseja filtrar
+    where: {// Aqui faz comparação se a chave login é igual "Wister"
+        login:"Wister"
+    }
+}
+
+pode passar também sepadradamente
+
+{attributes:vetor,// aqui passa um vetor com os nomes dos campos que deseja filtrar}
+
+where: {login:"Wister"}
+
+*/
+
+
