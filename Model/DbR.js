@@ -5,31 +5,47 @@ class DbR{
             this._db=db;//Só para verficar se a conexão com o DB foi bem sucedida ou não
             this._table=table;
             this.ok()//Confirmação da conexão bem sucedida ou não
-            //this.newTable()
+            this.impTest();
+            //this.newTable();
     }
-    newTable(){//CRIA NOVA TABELA
-        this.table.sync({force:true})
+    newTable(force=false){//CRIA NOVA TABELA
+        this.table.sync({force:force})
     }
     // CRUD
-
     //  C
    async insertinto(values){
        let res = await this.table.create({
             login: values.login,
             password:values.password
         })
-        console.log(res)
     }
     // R
+    async selectAll(vetor=false){
+        let users=[]
+        let res = vetor?await this.table.findAll({attributes:vetor,where: {login:"Wister"}}):await this.table.findAll()
+        res.forEach(user=>{
+            users.push(user.dataValues)
+        })
+        return users;
+    }
+    async select(id){
+        let res = await this.table.findByPk(id)
+        return res.dataValues;
+    }
     //Método para confirmação de conexão
     async ok(){
         try {
             await this.db.authenticate();
             console.log('Banco de dados conectado com sucesso!.');
-            this.insertinto({login:"Magnuz",password:123})
           } catch (error) {
             console.error('Erro na conexão ao DB:', error);
           }
+
+    }
+   async impTest(){
+    let res = await this.selectAll(["login","password"]);
+    console.log(res)
+        
     }
     //SETs and GETs
     get table(){
@@ -42,3 +58,24 @@ class DbR{
 }
 
 module.exports=DbR;
+
+
+/*
+Modelo de buscas pelo findAll passando como parametro
+
+{
+    attributes:vetor,// aqui passa um vetor com os nomes dos campos que deseja filtrar
+    where: {// Aqui faz comparação se a chave login é igual "Wister"
+        login:"Wister"
+    }
+}
+
+pode passar também sepadradamente
+
+{attributes:vetor,// aqui passa um vetor com os nomes dos campos que deseja filtrar}
+
+where: {login:"Wister"}
+
+*/
+
+
