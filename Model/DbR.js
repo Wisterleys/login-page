@@ -18,15 +18,27 @@ class DbR{
             login: values.login,
             password:values.password
         })
-        console.log(res)
     }
     // R
+    async selectAll(){
+        let res = await this.table.findAll()
+        return res;
+    }
+    // IMP
+    impAll(){
+        this.selectAll()
+        .then(res=>{
+            res.forEach(user=>{
+                    console.log(user.dataValues)
+            })
+        })
+    }
     //Método para confirmação de conexão
     async ok(){
         try {
             await this.db.authenticate();
             console.log('Banco de dados conectado com sucesso!.');
-            this.insertinto({login:"Magnuz",password:123})
+           
           } catch (error) {
             console.error('Erro na conexão ao DB:', error);
           }
