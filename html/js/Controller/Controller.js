@@ -1,0 +1,5 @@
+class Controler{
+    constructor(){
+        
+    }
+}
