@@ -15,8 +15,8 @@ class DbR{
     //  C
    async insertinto(values){
        let res = await this.table.create({
-            nome: values.login,
-           senha:values.password
+            login: values.login,
+            password:values.password
         })
         console.log(res)
     }
