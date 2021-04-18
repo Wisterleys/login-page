@@ -32,3 +32,16 @@ input{
     transform: translateX(-50%);
     width: 50px;
 }
+p{
+    width: 100%;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: green;
+    transition: all 0.5s;
+}
+a:hover{
+    text-decoration: underline;
+    color: rgb(12, 219, 12);
+}
