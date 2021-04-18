@@ -5,14 +5,14 @@ class DbR{
         this._db= new Sequelize('users'/*DB*/, 'root'/*username*/, '123'/*password*/, {
             host: 'localhost',/*servername*/
             dialect:'mysql'})
+            this.table=this.db.define("cadastros",table)
             this.ok()//Confirmação da conexão bem sucedida ou não
     }
     newTable(){//CRIA NOVA TABELA
-       let user = this.db.define("cadastros",table)
-       user.sync()
+        this.table.sync()
     }
    async inserinto(values){
-       let res = await table.create({
+       let res = await this.table.create({
             nome: values.nome,
            senha:values.senha
         })
