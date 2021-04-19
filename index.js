@@ -15,6 +15,10 @@ async function selectAll(res,req=false){
         res.json(ress)
     }
 }
+ (()=>{
+    //let ress = await db.selectAll()
+        console.log({teste:"Eai foi??? eeee legal!!"})
+})();
 app.get("/",(req,res)=>{
     res.sendFile(__dirname+"/html/index.html")
 })
